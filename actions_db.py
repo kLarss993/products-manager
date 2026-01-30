@@ -23,4 +23,4 @@ def delete_product(name: str):
 
 
 def update_product(price: float, category: str):
- 
+        Product.update(price=price,category=category).where(Product.name == Product.name).execute()
