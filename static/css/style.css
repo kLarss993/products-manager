@@ -1,0 +1,23 @@
+html, body {
+    background: #1e1e1e;
+}
+
+a {
+    color: #4da3ff;
+}
+
+nav {
+    background-color: #1e1e1e;
+}
+
+button {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+input, textarea, select {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #444;
+}
