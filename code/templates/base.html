@@ -1,0 +1,82 @@
+<!--Спільний контент для всіх сторінок-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!--Сюди буде підставлятись назва вкладки для сторінки-->
+    <title>{% block title %}{% endblock%}</title>
+
+    <!--Підключення BootStrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+
+<nav class="navbar bg-dark navbark-dark">
+    <div class="container justify-content-center">
+        <a class="navbar-brand" href="#" max-height="100" mx-auto>
+            <strong><b>Менеджер товарів</b></strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav d-flex justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Додому</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ url_for('register') }}">Реєстрація</a>
+        </li>
+
+        {% if session.get('company_name') %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ url_for('logout') }}">Вийти</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ url_for('login') }}">Увійти</a>
+            </li>
+        {% endif %}
+      </ul>
+    </div>
+    </div>
+</nav>
+<br> <br>
+
+
+<div class="container-fluid">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="d-flex justify-content-center my-2">
+                    <div class="alert alert-success text-center py-1 px-3 fade show" role="alert" style="max-width: 300px; font-size: 0.9rem; border-radius: 10px;">
+                        {{ msg }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('.alert').forEach(a => a.remove());
+    }, 3000); // зникає через 5 секунд
+</script> <br> <br>
+
+
+<!--Сюди буде підставлятись унікальний контент сторінки -->
+{% block content %} {% endblock %}
+
+</body>
+</html>

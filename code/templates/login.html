@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+Вказуємо контент
+{% block title %} Увійти {% endblock %}
+
+
+{% block content %}
+
+
+<form method="POST">
+    <div class="container">
+
+        <h1 align="center"><b><strong>Увійти в систему</strong></b></h1>
+        <br><br>
+
+        <div class="input-group mb-3">
+        <span class="input-group-text" style="min-width: 150px;">
+                    <strong><b>Назва компанії</b></strong>
+        </span>
+        <input name="name" type="text" step="0.1" class="form-control bg-dark text-white">
+        </div>
+
+        <div class="input-group mb-3">
+        <span class="input-group-text" style="min-width: 150px;">
+                    <strong><b>Пароль</b></strong>
+                </span>
+        <input name="password" type="password" step="0.1" class="form-control bg-dark text-white">
+        </div> <br>
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-success w-100 btn-dark"><b><strong>Увійти</strong></b></button>
+        </div>
+
+    </div>
+</form>
+
+{% endblock %}
+</body>
+</html>

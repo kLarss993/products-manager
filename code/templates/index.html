@@ -1,0 +1,94 @@
+<!--Беремо за основу шаблон base -->
+{% extends 'base.html' %}
+
+Вказуємо контент
+{% block title %} Poducts manager {% endblock %}
+
+<!--Вказуємо файл зі стилями-->
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+<!--Вказуємо контент-->
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 align="center"><strong><b>Додати товар</b></strong></h1>
+    <br><br>
+
+    <form method="post" class="w-100">
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" style="min-width: 150px;">
+                <strong><b>Назва</b></strong>
+            </span>
+            <input name="name" type="text" step="0.1" class="form-control bg-dark text-white">
+        </div>
+
+        <div class="input-group mb-4">
+            <span class="input-group-text" style="min-width: 150px;">
+                <strong><b>Ціна</b></strong>
+            </span>
+            <input name="price" type="number" class="form-control bg-dark text-white">
+        </div>
+
+        <div class="input-group mb-4">
+            <span class="input-group-text" style="min-width: 150px;">
+                <strong><b>Категорія</b></strong>
+            </span>
+            <input name="category" type="text" class="form-control bg-dark text-white">
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button type="sumbit" class="btn btn-success w-100 btn-dark"><b><strong>Додати</strong></b></button>
+        </div>
+    </form>
+</div> <br> <br> <br>
+
+<div class="container">
+
+        <h1 align="center"><strong><b>Фільтр за категорією</b></strong></h1> <br>
+
+        <form method="get">
+          <div class="dropdown-center d-flex justify-content-center">
+            <button class="btn btn-dark dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <strong><b>Всі</b></strong>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="?category=all">Всі</a></li>
+              {% for row in categories %}
+              <li><a class="dropdown-item" href="?category={{ row.category }}">{{ row.category }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </form> <br> <br>
+
+
+
+<h1 align="center"><strong><b>Список товарів</b></strong></h1> <br>
+
+<table border="1" cellpadding="5" class="table table-dark table-striped">
+        <tr>
+                <th>Назва</th>
+                <th>Ціна</th>
+                <th>Категорія</th>
+                <th>Дія</th>
+        </tr>
+
+        {% for item in products %}
+        <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.category }}</td>
+                <td>
+                        <a href="{{ url_for('delete', name=item.name) }}">Видалити</a>
+                        <a href="{{ url_for('update', product_name=item.name) }}">Редагувати</a>
+                </td>
+        </tr>
+        {% endfor %}
+</table>
+
+</div>
+
+{% endblock %}
